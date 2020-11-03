@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+
+	<!-- Viewresolver 등록 전위자:/WEB-INF/views/ 후위자:.jsp  -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix"  value=".jsp" /><!-- view에 해당하는 폴더 경로 지정 -->
+		<property name="prefix" value="/WEB-INF/views/" /><!-- view 문서의 확장자를 지정 -->
+		<!-- setPrefix()와 setSuffix() 함수 호출 -->
+	</bean>
+
+	<!-- mvc 자원 폴더 위치 지정 -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+</beans>

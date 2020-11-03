@@ -1,0 +1,42 @@
+@charset "EUC-KR";
+
+body{
+	wdith:100%;
+	background-color:#f5f5dc;
+}
+
+Table{
+	border: 1px solid black;
+}
+
+td{
+	background-color:black;
+	height:75px;
+}
+
+img{
+	width:70px;
+	height:70px;
+}
+
+font{
+	color:white;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+div.top{
+	padding-top:30px;
+	height:100px;
+	text-align:center;
+}
+
+div.left{
+	width:15%;
+	display:inline-block;
+}
+
+div.hero_content{
+	width:50%;
+	display:inline-block;
+}
