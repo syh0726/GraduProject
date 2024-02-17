@@ -31,7 +31,7 @@ public class AfkService {
 	@Autowired
 	AfkRepository afkrepository;
 	
-	public AfkValue calculator(AfkMap afk) {				//°è»êÇÏ¿© ÆäÀÌÁöÀÇ ÁÂÃø °ªµéÀ» ¹İÈ¯ ÇÕ´Ï´Ù.
+	public AfkValue calculator(AfkMap afk) {				//ê³„ì‚°í•˜ì—¬ í˜ì´ì§€ì˜ ì¢Œì¸¡ ê°’ë“¤ì„ ë°˜í™˜ í•©ë‹ˆë‹¤.
 		List<Afk> afkList=afkrepository.findAll();
 		AfkValue afkvalue = new AfkValue();
 		
@@ -39,33 +39,33 @@ public class AfkService {
 		double totalGold=0;
 		double totalEssence=0;
 		double maxTotal=0;
-		int option; //ÃÖ´ë ½Ã°£À» ±¸ÇÏ±â À§ÇÑ ¿É¼Ç°ªÀÔ´Ï´Ù. ¿É¼ÇÀÌ (1ÀÌ¶ó¸é °æÇèÄ¡ 2¶ó¸é °ñµå 3ÀÌ¶ó¸é ¿µ¿õÀÇ °¡·ç)°¡ ÃÖ´ë½Ã°£
+		int option; //ìµœëŒ€ ì‹œê°„ì„ êµ¬í•˜ê¸° ìœ„í•œ ì˜µì…˜ê°’ì…ë‹ˆë‹¤. ì˜µì…˜ì´ (1ì´ë¼ë©´ ê²½í—˜ì¹˜ 2ë¼ë©´ ê³¨ë“œ 3ì´ë¼ë©´ ì˜ì›…ì˜ ê°€ë£¨)ê°€ ìµœëŒ€ì‹œê°„
 		
-		int weeks=0;  //·¹º§¾÷±îÁö µµ´ŞÇÏ´Â ÁÖ ÀÔ´Ï´Ù.
-		int days=0;   //·¹º§¾÷±îÁö µµ´ŞÇÏ´Â ÀÏ¼ö ÀÔ´Ï´Ù.
-		int e_hour=0;	// ·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °æÇèÄ¡ °É¸®´Â ½Ã°£
-		int e_min=0;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °æÇèÄ¡ °É¸®´Â ºĞ
-		int e_sec=0;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °æÇèÄ¡ °É¸®´Â ÃÊ
-		int g_hour=0;	// ·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °ñµå °É¸®´Â ½Ã°£
-		int g_min=0;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °ñµå °É¸®´Â ºĞ
-		int g_sec=0;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °ñµå °É¸®´Â ÃÊ
-		int ec_hour=0;	// ·¹º§¾÷±îÁö µµ´ŞÇÏ´Â ¿µ¿õÀÇ °¡·ç °É¸®´Â ½Ã°£
-		int ec_min=0;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â ¿µ¿õÀÇ °¡·ç °É¸®´Â ºĞ
-		int ec_sec=0;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â ¿µ¿õÀÇ °¡·ç °É¸®´Â ÃÊ
+		int weeks=0;  //ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ì£¼ ì…ë‹ˆë‹¤.
+		int days=0;   //ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ì¼ìˆ˜ ì…ë‹ˆë‹¤.
+		int e_hour=0;	// ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê²½í—˜ì¹˜ ê±¸ë¦¬ëŠ” ì‹œê°„
+		int e_min=0;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê²½í—˜ì¹˜ ê±¸ë¦¬ëŠ” ë¶„
+		int e_sec=0;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê²½í—˜ì¹˜ ê±¸ë¦¬ëŠ” ì´ˆ
+		int g_hour=0;	// ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê³¨ë“œ ê±¸ë¦¬ëŠ” ì‹œê°„
+		int g_min=0;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê³¨ë“œ ê±¸ë¦¬ëŠ” ë¶„
+		int g_sec=0;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê³¨ë“œ ê±¸ë¦¬ëŠ” ì´ˆ
+		int ec_hour=0;	// ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ì˜ì›…ì˜ ê°€ë£¨ ê±¸ë¦¬ëŠ” ì‹œê°„
+		int ec_min=0;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ì˜ì›…ì˜ ê°€ë£¨ ê±¸ë¦¬ëŠ” ë¶„
+		int ec_sec=0;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ì˜ì›…ì˜ ê°€ë£¨ ê±¸ë¦¬ëŠ” ì´ˆ
 		
 		int s_lv=Integer.parseInt(afk.getStart())-1;
 		int e_lv=Integer.parseInt(afk.getEnd())-1;
-		int n_exp=Integer.parseInt(afk.getN_exp());			//ÇöÀç °æÇèÄ¡
-		int n_gold=Integer.parseInt(afk.getN_gold());		//ÇöÀç °ñµå
-		int n_essence=Integer.parseInt(afk.getN_essence());	//ÇöÀç ¿µ¿õÀÇ °¡·ç
-		int m_exp=Integer.parseInt(afk.getM_exp());			//ºĞ´ç °æÇèÄ¡ È¹µæ·®
-		int m_gold=Integer.parseInt(afk.getM_gold());		//ºĞ´ç °ñµå È¹µæ·®
-		int h_essence=Integer.parseInt(afk.getH_essence());	//½Ã°£´ç ¿µ¿õÀÇ °¡·ç È¹µæ·®
+		int n_exp=Integer.parseInt(afk.getN_exp());			//í˜„ì¬ ê²½í—˜ì¹˜
+		int n_gold=Integer.parseInt(afk.getN_gold());		//í˜„ì¬ ê³¨ë“œ
+		int n_essence=Integer.parseInt(afk.getN_essence());	//í˜„ì¬ ì˜ì›…ì˜ ê°€ë£¨
+		int m_exp=Integer.parseInt(afk.getM_exp());			//ë¶„ë‹¹ ê²½í—˜ì¹˜ íšë“ëŸ‰
+		int m_gold=Integer.parseInt(afk.getM_gold());		//ë¶„ë‹¹ ê³¨ë“œ íšë“ëŸ‰
+		int h_essence=Integer.parseInt(afk.getH_essence());	//ì‹œê°„ë‹¹ ì˜ì›…ì˜ ê°€ë£¨ íšë“ëŸ‰
 		
-		String t_exp;		//·¹º§¾÷ ±îÁö µµ´ŞÇÏ´Â °æÇèÄ¡ ½Ã°£
-		String t_gold;		//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °ñµå ½Ã°£
-		String t_essence;	//·¹º§¾÷±îÁö µµ´ŞÇÏ´Â °æÇèÄ¡ ¿µ¿õÀÇ °¡·ç
-		String max_time = null;  //·¹º§¾÷±îÁö µµ´ŞÇÏ´Â ÃÖ´ë ½Ã°£
+		String t_exp;		//ë ˆë²¨ì—… ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê²½í—˜ì¹˜ ì‹œê°„
+		String t_gold;		//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê³¨ë“œ ì‹œê°„
+		String t_essence;	//ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ê²½í—˜ì¹˜ ì˜ì›…ì˜ ê°€ë£¨
+		String max_time = null;  //ë ˆë²¨ì—…ê¹Œì§€ ë„ë‹¬í•˜ëŠ” ìµœëŒ€ ì‹œê°„
 		
 		while(s_lv<e_lv) {
 			totalExp+=afkList.get(s_lv).getExp();
@@ -106,7 +106,7 @@ public class AfkService {
 		System.out.println("totalGold:" +totalGold);
 		System.out.println("totalEssence: "+totalEssence);
 		
-		//¹Ø¿¡ °úÁ¤¿¡¼­ ºĞ´ç ÀÚ¿ø È¹µæ·®ÀÌ 0ÀÏ °æ¿ì total°ªÀ» ¸ğµÎ 0À¸·Î ¸¸µå¹Ç·Î 0ÀÌµÇ±âÀü¿¡ ¹Ì¸® °ªÀ» ÀúÀåÇØµÓ´Ï´Ù.
+		//ë°‘ì— ê³¼ì •ì—ì„œ ë¶„ë‹¹ ìì› íšë“ëŸ‰ì´ 0ì¼ ê²½ìš° totalê°’ì„ ëª¨ë‘ 0ìœ¼ë¡œ ë§Œë“œë¯€ë¡œ 0ì´ë˜ê¸°ì „ì— ë¯¸ë¦¬ ê°’ì„ ì €ì¥í•´ë‘¡ë‹ˆë‹¤.
 		afkvalue.setTotalExp((int)totalExp);
 		afkvalue.setTotalGold((int)totalGold);
 		afkvalue.setTotalEssence((int)totalEssence);
@@ -173,11 +173,11 @@ public class AfkService {
 		System.out.println("max_time:"+max_time);
 		
 		
-		//ÅäÅ» °ªµéÀº À§¿¡¼­ ¹Ì¸® ÀúÀåÇÏ¿´½À´Ï´Ù.
-		afkvalue.setT_exp(t_exp);			//°æÇèÄ¡ ½Ã°£
-		afkvalue.setT_gold(t_gold);			//°ñµå ½Ã°£
-		afkvalue.setT_essence(t_essence);	//¿¡¼¾½º ½Ã°£
-		afkvalue.setMax_time(max_time);		//ÃÖ´ë ½Ã°£
+		//í† íƒˆ ê°’ë“¤ì€ ìœ„ì—ì„œ ë¯¸ë¦¬ ì €ì¥í•˜ì˜€ìŠµë‹ˆë‹¤.
+		afkvalue.setT_exp(t_exp);			//ê²½í—˜ì¹˜ ì‹œê°„
+		afkvalue.setT_gold(t_gold);			//ê³¨ë“œ ì‹œê°„
+		afkvalue.setT_essence(t_essence);	//ì—ì„¼ìŠ¤ ì‹œê°„
+		afkvalue.setMax_time(max_time);		//ìµœëŒ€ ì‹œê°„
 		
 		return afkvalue;
 	}
@@ -193,14 +193,14 @@ public class AfkService {
 		return afkvalue;
 	}
 	
-	//ÃÖ´ë ½Ã°£À» °è»êÇÏ´Â ÇÔ¼ö ÀÔ´Ï´Ù.
+	//ìµœëŒ€ ì‹œê°„ì„ ê³„ì‚°í•˜ëŠ” í•¨ìˆ˜ ì…ë‹ˆë‹¤.
 	public String get_max_time(AfkValue afkvalue,int hour,int min,int sec,int option) {
 		int days=0;
 		int weeks=0;
 				
-		afkvalue.setMax_hour(hour);	//ÃÖ´ë ½Ã°£
-		afkvalue.setMax_min(min);	//ÃÖ´ë ºĞ
-		afkvalue.setMax_sec(sec);	//ÃÖ´ë ÃÊ ÁöÁ¤  ³ªÁß¿¡ ºä¿¡¼­ js¸¦ ÀÌ¿ëÇØ¼­ ÇÕÄ¥ °ÍÀÔ´Ï´Ù.
+		afkvalue.setMax_hour(hour);	//ìµœëŒ€ ì‹œê°„
+		afkvalue.setMax_min(min);	//ìµœëŒ€ ë¶„
+		afkvalue.setMax_sec(sec);	//ìµœëŒ€ ì´ˆ ì§€ì •  ë‚˜ì¤‘ì— ë·°ì—ì„œ jsë¥¼ ì´ìš©í•´ì„œ í•©ì¹  ê²ƒì…ë‹ˆë‹¤.
 		
 		System.out.println(hour+" : "+" : "+min+" : "+sec);
 		
@@ -215,48 +215,48 @@ public class AfkService {
 		}
 		
 		if(option==1) {
-			return sec+"ÃÊ";
+			return sec+"ì´ˆ";
 		}else if(option==2) {
-			return min+"ºĞ "+sec+"ÃÊ";
+			return min+"ë¶„ "+sec+"ì´ˆ";
 		}else if(option==3) {
-			return hour+"½Ã°£ "+min+"ºĞ "+sec+"ÃÊ";
+			return hour+"ì‹œê°„ "+min+"ë¶„ "+sec+"ì´ˆ";
 		}else if(option==4) {
-			return days+"ÀÏ "+hour+"½Ã°£ "+min+"ºĞ "+sec+"ÃÊ";
+			return days+"ì¼ "+hour+"ì‹œê°„ "+min+"ë¶„ "+sec+"ì´ˆ";
 		}else {
-			return weeks+"ÁÖ "+days+"ÀÏ "+hour+"½Ã°£ "+min+"ºĞ "+sec+"ÃÊ";
+			return weeks+"ì£¼ "+days+"ì¼ "+hour+"ì‹œê°„ "+min+"ë¶„ "+sec+"ì´ˆ";
 		}
 		
 	}
 	
-	//ÃÖ´ë½Ã°£ÀÇ »çÀÌÁî ÃøÁ¤
+	//ìµœëŒ€ì‹œê°„ì˜ ì‚¬ì´ì¦ˆ ì¸¡ì •
 	public int size_total(double total,int resource) {
-		if(total<resource) {			//ÃÖ´ë½Ã°£ÀÌ ÃÊ ´ÜÀ§ ÀÏ °æ¿ì 		
+		if(total<resource) {			//ìµœëŒ€ì‹œê°„ì´ ì´ˆ ë‹¨ìœ„ ì¼ ê²½ìš° 		
 			return 1;
-		}else if(total<resource*60) {	//ÃÖ´ë½Ã°£ÀÌ ºĞ ´ÜÀ§ ÀÏ °æ¿ì		
+		}else if(total<resource*60) {	//ìµœëŒ€ì‹œê°„ì´ ë¶„ ë‹¨ìœ„ ì¼ ê²½ìš°		
 			return 2;
-		}else if(total<resource*60*24){	//ÃÖ´ë½Ã°£ÀÌ ½Ã°£ ´ÜÀ§ ÀÏ °æ¿ì		
+		}else if(total<resource*60*24){	//ìµœëŒ€ì‹œê°„ì´ ì‹œê°„ ë‹¨ìœ„ ì¼ ê²½ìš°		
 			return 3;
-		}else if(total<resource*60*24*7){	//ÃÖ´ë½Ã°£ÀÌ ÀÏ ´ÜÀ§ ÀÏ °æ¿ì	
+		}else if(total<resource*60*24*7){	//ìµœëŒ€ì‹œê°„ì´ ì¼ ë‹¨ìœ„ ì¼ ê²½ìš°	
 			return 4;
-		}else {								//ÃÖ´ë½Ã°£ÀÌ ÁÖ ´ÜÀ§ ÀÏ °æ¿ì
+		}else {								//ìµœëŒ€ì‹œê°„ì´ ì£¼ ë‹¨ìœ„ ì¼ ê²½ìš°
 			return 5;
 		}
 	}
 	
-	//°¡·ç´Â ÃÖ¼Ò½Ã°£ÀÌ ºĞÀÌ±â ¶§¹®¿¡ ÃÖ´ë½Ã°£À» ÃøÁ¤ÇÒ ¶§ µû·Î ±¸ÇöÇÏ¿´½À´Ï´Ù.
+	//ê°€ë£¨ëŠ” ìµœì†Œì‹œê°„ì´ ë¶„ì´ê¸° ë•Œë¬¸ì— ìµœëŒ€ì‹œê°„ì„ ì¸¡ì •í•  ë•Œ ë”°ë¡œ êµ¬í˜„í•˜ì˜€ìŠµë‹ˆë‹¤.
 	public int essence_size(double total,int resource) {
-		if(total<resource) {			  //°¡·ç´Â ºĞ´ÜÀ§ ÀÏ °æ¿ì
+		if(total<resource) {			  //ê°€ë£¨ëŠ” ë¶„ë‹¨ìœ„ ì¼ ê²½ìš°
 			return 2;
-		}else if(total<resource*24) {		//°¡·ç´Â ½Ã°£ ´ÜÀ§ ÀÏ °æ¿ì
+		}else if(total<resource*24) {		//ê°€ë£¨ëŠ” ì‹œê°„ ë‹¨ìœ„ ì¼ ê²½ìš°
 			return 3;
-		}else if(total<resource*24*7){		//°¡·ç´Â ÀÏ ´ÜÀ§ÀÏ °æ¿ì
+		}else if(total<resource*24*7){		//ê°€ë£¨ëŠ” ì¼ ë‹¨ìœ„ì¼ ê²½ìš°
 			return 4;
-		}else {								//°¡·ç´Â ÁÖ ´ÜÀ§ÀÏ °æ¿ì
+		}else {								//ê°€ë£¨ëŠ” ì£¼ ë‹¨ìœ„ì¼ ê²½ìš°
 			return 5;
 		}
 	}
 	
-	//ÇÊ¿äÇÑ ÀÚ¿ø¿¡¼­ ÇöÀç ÀÖ´Â ÀÚ¿øÀ» »®´Ï´Ù.
+	//í•„ìš”í•œ ìì›ì—ì„œ í˜„ì¬ ìˆëŠ” ìì›ì„ ëºë‹ˆë‹¤.
 	public double subtract_resource(double total,int resource) {
 		if(total<resource) {
 			total=0;
@@ -268,7 +268,7 @@ public class AfkService {
 	}
 	
 	public String trans_service(String src_text){
-		String apikey="d1e60bc7cbc98a6fbabab92592aed476";
+		String apikey="";
 		 String translate=null;
 		try {
 			String text=URLEncoder.encode(src_text,"UTF-8");
@@ -308,7 +308,7 @@ public class AfkService {
 
 			br.close();
 		}catch(Exception e) {
-			System.out.println("¿À·ù ¹ß»ı");
+			System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			System.out.println(e);
 		}
 		return translate;
